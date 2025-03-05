@@ -1,0 +1,4 @@
+/home/volodya/projects/modelling/lab1/build/CMakeFiles/MUSH.dir
+/home/volodya/projects/modelling/lab1/build/CMakeFiles/main.dir
+/home/volodya/projects/modelling/lab1/build/CMakeFiles/edit_cache.dir
+/home/volodya/projects/modelling/lab1/build/CMakeFiles/rebuild_cache.dir

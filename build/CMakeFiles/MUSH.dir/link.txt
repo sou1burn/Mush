@@ -1,0 +1,2 @@
+/usr/bin/ar qc libMUSH.a CMakeFiles/MUSH.dir/Mush/mush.cpp.o
+/usr/bin/ranlib libMUSH.a
