@@ -6,5 +6,7 @@ int main(int argc, char** argv)
 
     for (auto i = 0; i < 10; ++i)
         std::cout << generator.next() << "\n";
-    return 1;
+
+    std::cout << "\nSuccess!\n";
+    return 0;
 }

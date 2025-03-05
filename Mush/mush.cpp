@@ -7,16 +7,18 @@ namespace mush
     {
         m_generatorA.resize(55);
         m_generatorB.resize(52);
+        std::mt19937 gen1(seedA);
+        std::mt19937 gen2(seedB);
+        std::uniform_int_distribution<uint32_t> dist(0, std::numeric_limits<uint16_t>::max());
+
         for (auto i = 0; i < 55; ++i) 
-            m_generatorA[i] = seedA + i;
+            m_generatorA[i] = dist(gen1);
         for (auto i = 0; i < 52; ++i)
-            m_generatorB[i] = seedB + i;
+            m_generatorB[i] = dist(gen2);
     }
 
     uint32_t MushGenerator::nextA()
     {
-        // uint32_t idx1 = (m_indexA + 55 - 55) % 55;
-        // uint32_t idx2 = (m_indexA + 55 - 24) % 55;
         uint32_t next = (m_generatorA[(m_indexA - 55) % 55] + m_generatorA[(m_indexA - 24) % 55]) % m_module;
         m_overflowA = next < m_generatorA[(m_indexA - 55) % 55];
         m_generatorA[m_indexA] = next;
@@ -26,8 +28,6 @@ namespace mush
 
     uint32_t MushGenerator::nextB()
     {
-        // uint32_t idx1 = (m_indexB + 52 - 52) % 52;
-        // uint32_t idx2 = (m_indexB + 52 - 19) % 52;
         uint32_t next = (m_generatorB[(m_indexB - 52) % 52] + m_generatorB[(m_indexB - 19) % 52]) % m_module;
         m_overflowB = next < m_generatorB[(m_indexB - 52) % 52];
         m_generatorB[m_indexB] = next;
@@ -38,12 +38,12 @@ namespace mush
     uint32_t MushGenerator::next()
     {
         uint32_t A = nextA();
-        if (m_overflowA)
-            nextB();
-
         uint32_t B = nextB();
+        if (m_overflowA)
+            B = nextB();
+
         if (m_overflowB)
-            nextA();
+            A = nextA();
 
         return A ^ B;
     }
