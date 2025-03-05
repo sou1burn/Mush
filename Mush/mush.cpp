@@ -9,7 +9,7 @@ namespace mush
         m_generatorB.resize(52);
         std::mt19937 gen1(seedA);
         std::mt19937 gen2(seedB);
-        std::uniform_int_distribution<uint32_t> dist(0, std::numeric_limits<uint16_t>::max());
+        std::uniform_int_distribution<uint32_t> dist(0, std::numeric_limits<uint32_t>::max());
 
         for (auto i = 0; i < 55; ++i) 
             m_generatorA[i] = dist(gen1);
